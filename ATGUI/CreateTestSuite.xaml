@@ -1,0 +1,82 @@
+<Window x:Class="ATGUI.CreateTestSuite"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ATGUI"
+        mc:Ignorable="d"
+        Title="CreateTestSuite" Height="420" Width="800">
+    <Grid>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,10" Content="Package Name:"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,10,10,10" Content="N/A" Name="PackageNameLabel" HorizontalContentAlignment="Left"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,10,10" Content="Test Suite Name:"/>
+        <TextBox Name="TestSuiteNameTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,44,0,0" Width="150" RenderTransformOrigin="0.52,0.722" TextChanged="TestSuiteNameTB_TextChanged"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,70,10,10" Content="Description:"/>
+        <TextBox Name="DescriptionTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,74,0,0" Width="150" RenderTransformOrigin="0.52,0.722"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,10,10" Content="Priority:"/>
+        <TextBox Name="PriorityTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,104,0,0" Width="50" Text="10"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,100,10,10" Content="(1..10)"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,10,10" Content="Max concurrently running VMs:"/>
+        <TextBox Name="MaxRunningTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,134,10,10" Width="50" TextChanged="MaxRunningTB_TextChanged"/>
+
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,160,0,0" Content="Number of runs:"/>
+        <TextBox Name="NumberOfRunsTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,164,0,0" Width="50" TextChanged="NumberOfRunsTB_TextChanged"/>
+
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,220,0,0" Content="Select configuration:"/>
+        <!--<ComboBox Name="ConfigurationCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,220,0,0" Height="24" Width="200">    
+        </ComboBox>
+        -->
+        <Button Margin="200,220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Select" Width="200" Height="24" Name="ConfigSelect" Click="ConfigSelect_Click" Background="Orange"/>
+        
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Select licence key:" Margin="10,250,0,0"/>
+        <ComboBox Name="LicenseKeyCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,250,0,0" Height="24" Width="200">
+        </ComboBox>
+
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Select release:" Margin="10,280,0,0"/>
+        <ComboBox Name="ReleaseCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,280,0,0"
+                  Height="24" Width="200" SelectionChanged="ReleaseCB_SelectionChanged" Background="Orange">
+            <ComboBoxItem Content="Provided in TestPackage" Tag="package"/>
+            <ComboBoxItem Content="Latest by DownloadLink" Tag="latest"/>
+            <ComboBoxItem Content="Drag and drop" Tag="dragdrop"/>
+        </ComboBox>
+
+        <StackPanel Margin="410,260,0,0" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Name="FileDrop" AllowDrop="True" Drop="FileDrop_Drop" Visibility="Visible">
+            <Image Source="Resources\drag_and_drop-512.png"/>
+        </StackPanel>
+
+        <Label Name="DownloadLinkLL" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Select DownloadLink:" Margin="10,310,0,0"  Visibility="Visible"/>
+        <Label Name="DragDropLL" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Selected file:" Margin="10,310,0,0"  Visibility="Visible"/>
+        <Label Name="DragDropFileLL" HorizontalAlignment="Left" VerticalAlignment="Top" Content="" Margin="200,310,0,0" Width="200" Visibility="Visible"/>
+        <ComboBox Name="DownloadLinkCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,310,0,0" Height="24" Width="200"  Visibility="Visible">
+        </ComboBox>
+
+        <Button Name="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30" Width="80" Margin="10,10,100,10" Content="Cancel" Click="Cancel_Click"/>
+        <Button Name="Submit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30" Width="80" Margin="10,10,10,10" Content="Submit" Click="Submit_Click"/>
+
+        <GroupBox Name="SchedulingGB" Header="Scheduling" Margin="490,20,0,0" HorizontalAlignment="Left" VerticalAlignment="top" Width="280" Height="90">
+            <Grid>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Text="Sun"/>
+                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,28,0,0" Width="34" Name="SunTB"/>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,10,0,0" Text="Mon"/>
+                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,28,0,0" Width="34" Name="MonTB"/>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82,10,0,0" Text="Tue"/>
+                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,28,0,0" Width="34" Name="TueTB"/>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="118,10,0,0" Text="Wed"/>
+                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="116,28,0,0" Width="34" Name="WedTB"/>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,10,0,0" Text="Thu"/>
+                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,28,0,0" Width="34" Name="ThuTB"/>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,10,0,0" Text="Fri"/>
+                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="188,28,0,0" Width="34" Name="FriTB"/>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="226,10,0,0" Text="Sat"/>
+                <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="224,28,0,0" Width="34" Name="SatTB"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

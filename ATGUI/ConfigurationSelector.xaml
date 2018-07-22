@@ -1,0 +1,41 @@
+﻿<Window x:Class="ATGUI.ConfigurationSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ATGUI"
+        mc:Ignorable="d"
+        Title="ConfigurationSelector" Height="750" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <CheckBox Content="Select All" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Name="SelectAll" Checked="SelectAll_Checked" Unchecked="SelectAll_Unchecked" Grid.Row="0"/>
+        
+        <ListView Name="Configurations" Margin="10,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="Auto">
+                        <GridViewColumnHeader Name="Selected" Click="SortClick">
+                        </GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Tag="{Binding ConfigurationID}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" IsChecked="{Binding Selected}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ConfigurationName}" Width="Auto">
+                        <GridViewColumnHeader Name="ConfigurationNameColumnHeader" Click="SortClick" Tag="ConfigurationName" Content="Configuration Name">
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Name="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30" Width="80" Margin="10,10,100,10" Content="Cancel" Click="Cancel_Click" Grid.Row="1"/>
+        <Button Name="Submit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30" Width="80" Margin="10,10,10,10" Content="Submit" Click="Submit_Click" Grid.Row="1"/>
+
+    </Grid>
+</Window>
